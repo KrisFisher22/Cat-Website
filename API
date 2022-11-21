@@ -1,0 +1,23 @@
+
+        //Connects to the API and gets information to display on the document
+        //Async function enables asynchronous, promise-based behavior to be written in a cleaner style, avoiding the need to explicitly configure promise chains.
+        async function randomFact() {
+          try {
+              var facts = ""
+              //The await operator is used to wait for a Promise and get its fulfillment value.
+              const response = await fetch("https://catfact.ninja/facts?limit=10");
+              const data = await response.json();
+              //For loop 
+              for (var i = 0; i < data.data.length; i++) {
+                  facts = facts + `Fact ${i}: ${data.data[i].fact} </br>`;
+              }
+              //document.getElementById returns an Element object representing the element whose id property matches the specified string.
+              const p = document.getElementById("length");
+              p.innerHTML = facts
+              // catch statement allows you to define a block of code to be executed, if an error occurs in the try block.
+          } catch (error) {
+              const p = document.getElementById("length");
+              p.innerHTML = "Sorry there's an error"
+          }
+      }
+      randomFact();
